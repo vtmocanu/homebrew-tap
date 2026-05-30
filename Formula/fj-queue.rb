@@ -11,14 +11,12 @@ class FjQueue < Formula
   def install
     libexec.install "fj_queue.py"
 
-    # uv resolves the script's PEP-723 inline deps (httpx, rich) on first run.
-    # Pin the interpreter to the brewed python@3.13 so uv reuses it instead of
-    # downloading a managed CPython.
+    # uv resolves the script's PEP-723 deps (httpx, rich) on first run.
+    # Pin the interpreter to the brewed python@3.13 so uv reuses it
+    # instead of downloading a managed CPython.
     (bin/"fj-queue").write <<~SH
       #!/bin/bash
-      exec "#{Formula["uv"].opt_bin}/uv" run \\
-        --python "#{Formula["python@3.13"].opt_bin}/python3.13" \\
-        "#{libexec}/fj_queue.py" "$@"
+      exec "#{Formula["uv"].opt_bin}/uv" run --python "#{Formula["python@3.13"].opt_bin}/python3.13" "#{libexec}/fj_queue.py" "$@"
     SH
   end
 

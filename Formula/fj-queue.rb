@@ -1,8 +1,8 @@
 class FjQueue < Formula
   desc "Forgejo Actions runner and CI queue dashboard"
   homepage "https://github.com/vtmocanu/fj-queue"
-  url "https://github.com/vtmocanu/fj-queue/archive/refs/tags/v0.1.0.tar.gz"
-  sha256 "ebe00588a5524002dc8816a8f14d5c9dee0b9052d4e1d1172f0e9c4ce22ce786"
+  url "https://github.com/vtmocanu/fj-queue/archive/refs/tags/v0.2.0.tar.gz"
+  sha256 "d2ff9d525fa52255f54f8d99da9b2a84a1339c67b454a6526741c0808558ec11"
   license "MIT"
 
   depends_on "python@3.13"

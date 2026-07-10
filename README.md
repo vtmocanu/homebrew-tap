@@ -11,6 +11,7 @@ brew install <formula>
 
 | Formula | Description | Source |
 |---------|-------------|--------|
+| `cc-statusline` | Two-line ANSI statusline for Claude Code | [vtmocanu/cc-statusline](https://github.com/vtmocanu/cc-statusline) |
 | `fj-queue` | Forgejo Actions runner and CI queue dashboard | [vtmocanu/fj-queue](https://github.com/vtmocanu/fj-queue) |
 
 Formulae are bumped automatically on each upstream release.

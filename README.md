@@ -4,8 +4,11 @@ Homebrew tap for [@vtmocanu](https://github.com/vtmocanu)'s tools.
 
 ```sh
 brew tap vtmocanu/tap
+brew trust vtmocanu/tap    # Homebrew 6.0+ requires trusting third-party taps
 brew install <formula>
 ```
+
+(On Homebrew older than 6.0, skip the `brew trust` line. `brew trust --formula vtmocanu/tap/<formula>` scopes trust to a single formula instead of the whole tap.)
 
 ## Formulae
 

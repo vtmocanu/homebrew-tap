@@ -7,8 +7,8 @@
 class CcStatusline < Formula
   desc "Two-line ANSI statusline for Claude Code"
   homepage "https://github.com/vtmocanu/cc-statusline"
-  url "https://github.com/vtmocanu/cc-statusline/archive/refs/tags/v2.10.0.tar.gz"
-  sha256 "4887a4c10db11ffaadb93408e3d1ea540881c147a09b370afbdb4e6b93617101"
+  url "https://github.com/vtmocanu/cc-statusline/archive/refs/tags/v2.11.0.tar.gz"
+  sha256 "63a4773d71a445b0887df17f6bfe036ba683674a9f348df7e87780fea0c42a3f"
   license "MIT"
 
   # timeout (statusline.sh stdin read and kubectl guard) is GNU coreutils and
@@ -23,7 +23,7 @@ class CcStatusline < Formula
     # fetcher relative to its own (non-symlink-resolved) dirname, and the
     # fetcher/hook read the VERSION file from their dir or its parent for the
     # User-Agent. A bare bin symlink would break both, hence the wrapper.
-    libexec.install "statusline.sh", "claude-status-fetch.sh", "VERSION", "hooks"
+    libexec.install "statusline.sh", "claude-status-fetch.sh", "claude-usage-fetch.sh", "VERSION", "hooks"
 
     (bin/"cc-statusline").write <<~SH
       #!/bin/bash

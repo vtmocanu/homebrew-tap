@@ -7,8 +7,8 @@
 class CcStatusline < Formula
   desc "Two-line ANSI statusline for Claude Code"
   homepage "https://github.com/vtmocanu/cc-statusline"
-  url "https://github.com/vtmocanu/cc-statusline/archive/refs/tags/v2.15.0.tar.gz"
-  sha256 "8c3b8d3a5fcfa31326a3eba8fc6e39391dcf052f02c81d815e7e679aee42b606"
+  url "https://github.com/vtmocanu/cc-statusline/archive/refs/tags/v3.0.0.tar.gz"
+  sha256 "9ee3c9992c01921f75cc07c290606367c00b32b8acb4b18e26937b448fd8569d"
   license "MIT"
 
   # timeout (statusline.sh stdin read and kubectl guard) is GNU coreutils and
@@ -23,7 +23,7 @@ class CcStatusline < Formula
     # fetcher relative to its own (non-symlink-resolved) dirname, and the
     # fetcher/hook read the VERSION file from their dir or its parent for the
     # User-Agent. A bare bin symlink would break both, hence the wrapper.
-    libexec.install "statusline.sh", "claude-status-fetch.sh", "claude-usage-fetch.sh", "VERSION", "hooks"
+    libexec.install "statusline.sh", "claude-status-fetch.sh", "claude-usage-fetch.sh", "VERSION"
 
     (bin/"cc-statusline").write <<~SH
       #!/bin/bash
@@ -61,21 +61,9 @@ class CcStatusline < Formula
           "refreshInterval": 60
         }
 
-      Optional AI-generated session topics (UserPromptSubmit hook):
-
-        "hooks": {
-          "UserPromptSubmit": [
-            {
-              "matcher": "",
-              "hooks": [
-                {
-                  "type": "command",
-                  "command": "#{opt_libexec}/hooks/session-topic-capture.sh"
-                }
-              ]
-            }
-          ]
-        }
+      The descriptive session title on line 1 comes from Claude Code's native
+      session name; no hook is required. Hide it with STATUSLINE_TOPIC=0, and the
+      @handle with STATUSLINE_SESSION_NAME=0.
 
       Dev mode (render a working tree instead of the brewed copy):
 

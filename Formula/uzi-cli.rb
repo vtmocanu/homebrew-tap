@@ -30,8 +30,8 @@ class UziCli < Formula
   homepage "https://github.com/vtmocanu/uzi"
   # Placeholders. task brew:formula substitutes both for the tag's auto-generated source
   # tarball (https://github.com/vtmocanu/uzi/archive/refs/tags/<tag>.tar.gz) + its sha256.
-  url "https://github.com/vtmocanu/uzi/archive/refs/tags/v0.60.0.tar.gz"
-  sha256 "090390d9e8b1cd3e9e698ce6ec7c25b550b65fc5df58b6af53c8cd70c6b6ce88"
+  url "https://github.com/vtmocanu/uzi/archive/refs/tags/v0.61.0.tar.gz"
+  sha256 "666bd17836cd0da0e638385a0393cd80c2ed7ee79e4b7a4e599a1d0c3ac7b068"
   license "MIT"
 
   depends_on "go" => :build
@@ -67,6 +67,9 @@ class UziCli < Formula
 
       `uzi skill uninstall-hook` removes the hook; `uzi skill status` shows
       whether it is wired.
+
+      uzi's product docs are embedded in the binary and readable offline:
+      `uzi docs list`, `uzi docs search <query>`, `uzi docs show <slug>`.
     EOS
   end
 end

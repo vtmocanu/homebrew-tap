@@ -7,8 +7,8 @@
 class CcStatusline < Formula
   desc "Two-line ANSI statusline for Claude Code"
   homepage "https://github.com/vtmocanu/cc-statusline"
-  url "https://github.com/vtmocanu/cc-statusline/archive/refs/tags/v3.2.0.tar.gz"
-  sha256 "e84e0121e06ad01097cb9ac8d7925c16ffdf4aba41acfb8dd3c67ffe276ca41b"
+  url "https://github.com/vtmocanu/cc-statusline/archive/refs/tags/v3.3.0.tar.gz"
+  sha256 "362ccc0477300537abd5401bfe214f2de86e179ad7c0593eaa9566a2c302576f"
   license "MIT"
 
   # timeout (statusline.sh stdin read and kubectl guard) is GNU coreutils and
@@ -19,11 +19,12 @@ class CcStatusline < Formula
   uses_from_macos "perl"
 
   def install
-    # Keep the three scripts siblings in libexec: statusline.sh resolves the
-    # fetcher relative to its own (non-symlink-resolved) dirname, and the
-    # fetcher/hook read the VERSION file from their dir or its parent for the
+    # Keep the four scripts siblings in libexec: statusline.sh resolves the
+    # fetchers relative to its own (non-symlink-resolved) dirname, and the
+    # fetchers read the VERSION file from their dir or its parent for the
     # User-Agent. A bare bin symlink would break both, hence the wrapper.
-    libexec.install "statusline.sh", "claude-status-fetch.sh", "claude-usage-fetch.sh", "VERSION"
+    libexec.install "statusline.sh", "claude-status-fetch.sh", "claude-usage-fetch.sh",
+                    "cc-statusline-update-fetch.sh", "VERSION"
 
     (bin/"cc-statusline").write <<~SH
       #!/bin/bash
@@ -75,13 +76,15 @@ class CcStatusline < Formula
   end
 
   test do
-    # Mirror tests/run-tests.sh: isolated service cache, no fetcher spawn,
+    # Mirror tests/run-tests.sh: isolated service/update caches, no fetcher spawn,
     # pinned clock, profile badge off. Expect exit 0 and exactly 2 lines.
     fixture = <<~JSON
       {"model":{"display_name":"Claude Opus 4.6","id":"opus"},"cwd":"#{testpath}","context_window":{"remaining_percentage":75,"context_window_size":1000000},"cost":{"total_duration_ms":300000},"session_id":"brewtest","rate_limits":{"five_hour":{"used_percentage":15,"resets_at":0},"seven_day":{"used_percentage":2,"resets_at":0}}}
     JSON
     env = "CC_STATUSLINE_SVC_CACHE=#{testpath}/svc-cache " \
           "CC_STATUSLINE_SVC_FETCH=#{testpath}/no-such-fetcher.sh " \
+          "CC_STATUSLINE_UPDATE_CACHE=#{testpath}/update-cache " \
+          "CC_STATUSLINE_UPDATE_FETCH=#{testpath}/no-such-update-fetcher.sh " \
           "CC_STATUSLINE_NOW=1700000000 STATUSLINE_PROFILE=0 KUBECONFIG=/dev/null"
     output = pipe_output("env #{env} #{bin}/cc-statusline", fixture, 0)
     assert_equal 2, output.lines.length, "expected exactly 2 statusline rows"

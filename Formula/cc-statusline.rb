@@ -7,8 +7,8 @@
 class CcStatusline < Formula
   desc "Two-line ANSI statusline for Claude Code"
   homepage "https://github.com/vtmocanu/cc-statusline"
-  url "https://github.com/vtmocanu/cc-statusline/archive/refs/tags/v3.3.0.tar.gz"
-  sha256 "362ccc0477300537abd5401bfe214f2de86e179ad7c0593eaa9566a2c302576f"
+  url "https://github.com/vtmocanu/cc-statusline/archive/refs/tags/v3.4.0.tar.gz"
+  sha256 "89ca3d575913b2367d295cfa3b8833eb6eeccbbf273292dcfaaaf71dc6fce4a4"
   license "MIT"
 
   # timeout (statusline.sh stdin read and kubectl guard) is GNU coreutils and
@@ -19,11 +19,12 @@ class CcStatusline < Formula
   uses_from_macos "perl"
 
   def install
-    # Keep the four scripts siblings in libexec: statusline.sh resolves the
-    # fetchers relative to its own (non-symlink-resolved) dirname, and the
-    # fetchers read the VERSION file from their dir or its parent for the
-    # User-Agent. A bare bin symlink would break both, hence the wrapper.
+    # Keep the six scripts siblings in libexec: statusline.sh resolves the
+    # helpers relative to its own (non-symlink-resolved) dirname, and network
+    # fetchers read VERSION from their dir or parent for the User-Agent. A bare
+    # bin symlink would break both, hence the wrapper.
     libexec.install "statusline.sh", "claude-status-fetch.sh", "claude-usage-fetch.sh",
+                    "codex-usage-fetch.sh", "gpt-credits-fetch.sh",
                     "cc-statusline-update-fetch.sh", "VERSION"
 
     (bin/"cc-statusline").write <<~SH

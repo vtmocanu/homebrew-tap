@@ -30,11 +30,12 @@ class UziCli < Formula
   homepage "https://github.com/vtmocanu/uzi"
   # Placeholders. task brew:formula substitutes both for the tag's auto-generated source
   # tarball (https://github.com/vtmocanu/uzi/archive/refs/tags/<tag>.tar.gz) + its sha256.
-  url "https://github.com/vtmocanu/uzi/archive/refs/tags/v0.82.0.tar.gz"
-  sha256 "04711fe1c28a1e3c9f31f592ebb0f994028323f2ef52a6ae80d120cd88f59198"
+  url "https://github.com/vtmocanu/uzi/archive/refs/tags/v0.83.0.tar.gz"
+  sha256 "5750e16797a4618fb0c5f39b64f3dc1649fb21be2983630b1219e54d83adc733"
   license "MIT"
 
   depends_on "go" => :build
+  conflicts_with "uzi-cli-rc", because: "both install a `uzi` binary; only one channel can be active at a time"
 
   def install
     # The Go module is rooted at api/, so build from there. `output: bin/"uzi"` names

@@ -7,8 +7,8 @@
 class CcStatusline < Formula
   desc "Two-line ANSI statusline for Claude Code"
   homepage "https://github.com/vtmocanu/cc-statusline"
-  url "https://github.com/vtmocanu/cc-statusline/archive/refs/tags/v3.4.1.tar.gz"
-  sha256 "2dd64a4c911e1db77e98eb627982528dfd35c317c5f0b468c6e269acf9f6e4c9"
+  url "https://github.com/vtmocanu/cc-statusline/archive/refs/tags/v3.5.0.tar.gz"
+  sha256 "a5eaec51fe2f76530e617bb0930e521466c36ce3eae24105aec96fa6614540cb"
   license "MIT"
 
   # timeout (statusline.sh stdin read and kubectl guard) is GNU coreutils and

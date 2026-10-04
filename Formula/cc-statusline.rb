@@ -7,8 +7,8 @@
 class CcStatusline < Formula
   desc "Two-line ANSI statusline for Claude Code"
   homepage "https://github.com/vtmocanu/cc-statusline"
-  url "https://github.com/vtmocanu/cc-statusline/archive/refs/tags/v3.5.1.tar.gz"
-  sha256 "7f1f66b58dbe7e26b45a28343c3e717f429c2758d5a39e6fe90ad6ef51163192"
+  url "https://github.com/vtmocanu/cc-statusline/archive/refs/tags/v3.6.0.tar.gz"
+  sha256 "583729b8519fd777c5b67cbe05d5c3b1a669e0bb452fec3bc070282e4e0222b4"
   license "MIT"
 
   # timeout (statusline.sh stdin read and kubectl guard) is GNU coreutils and
@@ -36,9 +36,10 @@ class CcStatusline < Formula
       # Dev override: run a working tree instead of the brewed copy, so
       # settings.json can point at "cc-statusline" permanently. Takes effect on
       # the next render, even in already-running Claude Code sessions. Enable:
-      #   mkdir -p ~/.config/cc-statusline
-      #   echo /path/to/cc-statusline > ~/.config/cc-statusline/dev-dir
-      # Disable: rm ~/.config/cc-statusline/dev-dir
+      #   D="${XDG_CONFIG_HOME:-$HOME/.config}/cc-statusline"
+      #   mkdir -p "$D"
+      #   echo /path/to/cc-statusline > "$D/dev-dir"
+      # Disable: rm "$D/dev-dir"
       dev_dir="${CC_STATUSLINE_DEV_DIR:-}"
       if [ -z "$dev_dir" ]; then
         dev_file="${XDG_CONFIG_HOME:-$HOME/.config}/cc-statusline/dev-dir"
@@ -69,8 +70,9 @@ class CcStatusline < Formula
 
       Dev mode (render a working tree instead of the brewed copy):
 
-        mkdir -p ~/.config/cc-statusline
-        echo /path/to/cc-statusline > ~/.config/cc-statusline/dev-dir
+        D="${XDG_CONFIG_HOME:-$HOME/.config}/cc-statusline"
+        mkdir -p "$D"
+        echo /path/to/cc-statusline > "$D/dev-dir"
 
       Remove that file to switch back.
     EOS

@@ -38,8 +38,8 @@ class UziCliRc < Formula
   homepage "https://github.com/vtmocanu/uzi"
   # Placeholders. task brew-rc:formula substitutes both for the tag's auto-generated source
   # tarball (https://github.com/vtmocanu/uzi/archive/refs/tags/<tag>.tar.gz) + its sha256.
-  url "https://github.com/vtmocanu/uzi/archive/refs/tags/v0.86.0-rc.3.tar.gz"
-  sha256 "f8836acea496e17acf83e24f4b1d7a406f05b20cf2685f5e1bcec1be1cb352a5"
+  url "https://github.com/vtmocanu/uzi/archive/refs/tags/v0.86.0-rc.4.tar.gz"
+  sha256 "4cad65d2946493be329e4c5561a82d8f3563f87db432be2ca887f39dd847eac6"
   license "MIT"
 
   depends_on "go" => :build
